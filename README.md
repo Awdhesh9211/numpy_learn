@@ -1,258 +1,361 @@
-# 🧠 NumPy Revision Guide (One-Stop Cheat Sheet)
+# 🧠 NumPy Revision Guide (With Output + Short Explanations)
 
 ---
 
 # 📌 1. What is NumPy?
 
-**NumPy (Numerical Python)** is a Python library used for fast numerical computations using multi-dimensional arrays.
+NumPy is a Python library for fast numerical computation using arrays.
 
 👉 Core object: `ndarray`
+👉 Think: List ➝ upgraded into math engine ⚡
 
 ---
 
-# 🏁 2. Origin & Why NumPy Exists
+# 🏁 2. Origin & Problem Solved
 
-### 📜 Origin
+* Created by Travis Oliphant (2005)
+* Problem:
 
-* Created by **Travis Oliphant (2005)**
-* Built on older libraries: Numeric + Numarray
+  * Python lists are slow
+  * No matrix support
+  * High memory usage
 
-### ❗ Problems it Solves
+✅ Solution:
 
-* Python lists are slow for numerical operations
-* No built-in support for matrix/linear algebra
-* Memory inefficient
-
-### ✅ NumPy Solves:
-
-* Fast computation (C backend)
-* Vectorized operations (no loops)
-* Efficient memory usage
-* Built-in linear algebra support
+* Fast (C backend)
+* Vectorized (no loops)
+* Built-in linear algebra
 
 ---
 
-# ⚙️ 3. Installation
-
-```bash
-pip install numpy
-```
+# 📦 3. Array Creation
 
 ```python
 import numpy as np
+
+a = np.array([1,2,3])
+print(a)
 ```
+
+Output:
+
+```
+[1 2 3]
+```
+
+👉 Creates array
 
 ---
 
-# 📦 4. Array Creation
+# 🔍 4. Properties
 
 ```python
-np.array([1,2,3])
-np.zeros((2,3))
-np.ones((2,2))
-np.eye(3)
-np.arange(0,10,2)
-np.linspace(0,1,5)
+print(a.shape)
+print(a.ndim)
 ```
+
+Output:
+
+```
+(3,)
+1
+```
+
+👉 Shape = size, ndim = dimensions
 
 ---
 
-# 🔍 5. Array Properties
+# ✂️ 5. Indexing
 
 ```python
-a.shape
-a.ndim
-a.size
-a.dtype
+print(a[1])
 ```
+
+Output:
+
+```
+2
+```
+
+👉 Access element
 
 ---
 
-# ✂️ 6. Indexing & Slicing
+# 🔄 6. Reshape
 
 ```python
-a[0]
-a[1:3]
-
-b[0,1]
-b[:,1]
-b[0,:]
+a = np.arange(6)
+print(a.reshape(2,3))
 ```
+
+Output:
+
+```
+[[0 1 2]
+ [3 4 5]]
+```
+
+👉 Change shape
 
 ---
 
-# 🔄 7. Reshaping
+# ➕ 7. Operations
 
 ```python
-a.reshape(2,3)
+a = np.array([1,2,3])
+b = np.array([4,5,6])
+print(a + b)
 ```
+
+Output:
+
+```
+[5 7 9]
+```
+
+👉 Element-wise addition
 
 ---
 
-# ➕ 8. Operations (Vectorization)
+# 📊 8. Math Functions
 
 ```python
-a + b
-a - b
-a * b
-a ** 2
+print(np.mean(a))
 ```
+
+Output:
+
+```
+2.0
+```
+
+👉 Average
 
 ---
 
-# 📊 9. Math Functions
+# 🔢 9. Broadcasting
 
 ```python
-np.sum(a)
-np.mean(a)
-np.min(a)
-np.max(a)
-np.std(a)
+print(a + 2)
 ```
+
+Output:
+
+```
+[3 4 5]
+```
+
+👉 Adds scalar to all elements
 
 ---
 
-# 🔢 10. Broadcasting
+# 🔍 10. Filtering
 
 ```python
-a + 2
+print(a[a > 1])
 ```
+
+Output:
+
+```
+[2 3]
+```
+
+👉 Condition-based selection
 
 ---
 
-# 🔍 11. Filtering
+# 🧱 11. CRUD Operations
+
+## CREATE
 
 ```python
-a[a > 3]
+a = np.array([1,2,3])
+a = np.append(a, 4)
+print(a)
 ```
+
+Output:
+
+```
+[1 2 3 4]
+```
+
+👉 Add element
+
+## READ
+
+```python
+print(a[2])
+```
+
+Output:
+
+```
+3
+```
+
+👉 Access value
+
+## UPDATE
+
+```python
+a[1] = 10
+print(a)
+```
+
+Output:
+
+```
+[ 1 10  3  4]
+```
+
+👉 Modify value
+
+## DELETE
+
+```python
+a = np.delete(a, 0)
+print(a)
+```
+
+Output:
+
+```
+[10  3  4]
+```
+
+👉 Remove element
 
 ---
 
-# 🔁 12. Iteration
+# 🧮 12. Matrix Operations
 
 ```python
-for x in a:
-    print(x)
+A = np.array([[1,2],[3,4]])
+B = np.array([[5,6],[7,8]])
+
+print(A + B)
 ```
+
+Output:
+
+```
+[[ 6  8]
+ [10 12]]
+```
+
+👉 Matrix addition
+
+```python
+print(A @ B)
+```
+
+Output:
+
+```
+[[19 22]
+ [43 50]]
+```
+
+👉 Matrix multiplication
+
+```python
+print(A.T)
+```
+
+Output:
+
+```
+[[1 3]
+ [2 4]]
+```
+
+👉 Transpose
+
+```python
+print(np.linalg.det(A))
+```
+
+Output:
+
+```
+-2.0
+```
+
+👉 Determinant
+
+```python
+print(np.linalg.inv(A))
+```
+
+Output:
+
+```
+[[-2.   1. ]
+ [ 1.5 -0.5]]
+```
+
+👉 Inverse
 
 ---
 
-# 🧱 13. CRUD Operations
-
-## ✅ CREATE
+# 🎲 13. Random
 
 ```python
-np.append(arr, 4)
-np.insert(arr, 1, 10)
+np.random.seed(1)
+print(np.random.randint(1,5))
 ```
 
-## 👀 READ
+Output:
 
-```python
-arr[0]
-arr[arr > 5]
+```
+2
 ```
 
-## ✏️ UPDATE
-
-```python
-arr[1] = 100
-arr[arr > 50] = 0
-```
-
-## ❌ DELETE
-
-```python
-np.delete(arr, 1)
-```
-
-⚠️ Note: NumPy arrays are fixed size → operations create new arrays
+👉 Random number
 
 ---
 
-# 🧮 14. Matrix Operations
+# 📁 14. Save & Load
 
 ```python
-A + B
-A - B
-A * B            # element-wise
-A @ B            # matrix multiplication
-A.T              # transpose
-np.linalg.inv(A)
-np.linalg.det(A)
-np.trace(A)
-np.linalg.matrix_power(A, 2)
-np.linalg.eig(A)
-np.linalg.solve(A, b)
+np.save('a.npy', a)
+b = np.load('a.npy')
+print(b)
 ```
 
----
+Output:
 
-# 🎲 15. Random
-
-```python
-np.random.rand(2,2)
-np.random.randint(1,10)
-np.random.seed(42)
+```
+[10  3  4]
 ```
 
----
-
-# 📁 16. Save & Load
-
-```python
-np.save('file.npy', a)
-np.load('file.npy')
-```
+👉 Store & retrieve data
 
 ---
 
-# 🧠 17. Key Concepts to Remember
+# 🧠 15. Key Concepts
 
-* `ndarray` is faster than list
-* Vectorization > loops
-* Broadcasting simplifies operations
-* NumPy = foundation of Data Science & ML
+* ndarray is fast
+* No loops needed
+* Fixed size arrays
 
 ---
 
-# ⚡ 18. When NOT to Use NumPy
+# ⚡ 16. When NOT to Use
 
 * Frequent insert/delete → use list
-* Tabular data → use Pandas
-
----
-
-# 🚀 19. Quick Practice
-
-```python
-arr = np.arange(1,11)
-
-print(arr[arr % 2 == 0])
-print(arr.reshape(2,5))
-print(np.mean(arr))
-```
+* Table data → use pandas
 
 ---
 
 # 🎯 Final Summary
 
-NumPy is:
+NumPy = speed + math + efficiency ⚡
 
-* Fast ⚡
-* Memory efficient 🧠
-* Math-focused 🔢
-
-👉 It turns Python into a scientific computing powerhouse.
+👉 Backbone of Data Science & ML
 
 ---
 
-# 🔥 Next Steps
-
-* Learn Pandas (data handling)
-* Learn Matplotlib (visualization)
-* Learn Machine Learning
-
----
-
-💡 Tip: Revise this once → Practice twice → You’ll remember forever.
+💡 Revise → Practice → Master 🚀
